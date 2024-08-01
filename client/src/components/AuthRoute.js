@@ -1,11 +1,13 @@
-// src/components/ProtectedRoute.js
+// src/components/AuthRoute.js
+
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const AuthRoute = ({ children }) => {
-  const token = localStorage.getItem('token'); // Check for token in localStorage
+  const { isAuthenticated } = useAuth();
 
-  return token ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
 export default AuthRoute;
